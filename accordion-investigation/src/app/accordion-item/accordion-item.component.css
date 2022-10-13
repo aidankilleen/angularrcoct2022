@@ -1,0 +1,19 @@
+div {
+    border: 1px solid black;
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+.accordion-item-header {
+    background-color: lightgreen;
+}
+.accordion-item-header {
+    display: flex;
+    flex-direction: row;
+}
+.accordion-item-header h2 {
+    flex-basis: 95%;
+}
