@@ -41,4 +41,12 @@ export class UserHttpService {
       })
     });
   }
+
+  updateUser(userToUpdate: User) {
+    return this.httpClient.put(`${this.baseUrl}/${userToUpdate.id}`, userToUpdate, {
+      headers: new HttpHeaders({
+        "Content-Type":"application/json"
+      })
+    });
+  }
 }

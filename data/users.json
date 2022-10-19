@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "name": "Alice",
+      "id": 1,
+      "name": "Alicia",
       "email": "alice@gmail.com",
-      "active": true,
-      "id": 1
+      "active": true
     },
     {
       "name": "Bob",
@@ -25,16 +25,16 @@
       "id": 4
     },
     {
-      "name": "New User",
-      "email": "new.user@gmail.com",
-      "active": true,
-      "id": 5
-    },
-    {
       "name": "Eve",
       "email": "eve@gmail.com",
       "active": true,
       "id": 6
+    },
+    {
+      "id": 7,
+      "name": "Fred",
+      "email": "fred@gmail.com",
+      "active": true
     }
   ]
 }
