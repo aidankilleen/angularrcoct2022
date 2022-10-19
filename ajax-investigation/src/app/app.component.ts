@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserHttpService } from './user-http.service';
 import User from './user.model';
 import { UserService } from './user.service';
@@ -31,17 +31,41 @@ import { UserService } from './user.service';
 
     <button (click)="onDelete()">Delete</button>
 
+
+
     <button (click)="onTestAjax()">
       Test Ajax
     </button>
-
     <hr>
-    {{ selectedUser | json }}
+    <h2>Add User</h2>
+
+    Name:<input [(ngModel)]="newUser.name"><br>
+    Email:<input [(ngModel)]="newUser.email"><br>
+    Active:<input 
+            type="checkbox" 
+            [(ngModel)]="newUser.active"><br>
+
+    <button (click)="onAddUser()">Add User</button>
+    <hr>
+    {{ selectedUser | json }}<br>
+    {{ newUser | json }}
   `,
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  newUser:User = new User(undefined, "", "", false);
+
+  onAddUser() {
+    //let newUser = new User(undefined,"New User From UI", "nu@gmail.com", false);
+
+    this.userHttpService.addUser(this.newUser)
+      .subscribe((data)=> {
+
+        let addedUser = data as User;
+        this.users.push(addedUser);
+      })
+  }
   onDelete() {
     if (confirm("Are you sure?")) {
       this.userHttpService.deleteUser(this.selectedId)
@@ -67,6 +91,10 @@ export class AppComponent {
 
   constructor(public userService: UserService, public userHttpService: UserHttpService) {
   }
+  ngOnInit(): void {
+    this.onGetUsers();
+  }
+
 
   onGetUsers() {
     //alert("get the users");

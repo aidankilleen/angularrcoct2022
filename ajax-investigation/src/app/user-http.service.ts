@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import User from './user.model';
 
@@ -28,5 +28,17 @@ export class UserHttpService {
   
   deleteUser(id:number) {
     return this.httpClient.delete(`${this.baseUrl}/${id}`);
+  }
+
+  addUser(userToAdd: User) {
+
+    // remove id from the user so the REST service 
+    // will assign a unique id.
+    delete userToAdd.id;
+    return this.httpClient.post(this.baseUrl, userToAdd, {
+      headers: new HttpHeaders({
+        "Content-Type":"application/json"
+      })
+    });
   }
 }

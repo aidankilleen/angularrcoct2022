@@ -1,9 +1,9 @@
 export default class User {
 
-    constructor(public id: number, 
-                public name: string, 
-                public email: string,
-                public active: boolean) {
+    constructor(public id?: number, 
+                public name?: string, 
+                public email?: string,
+                public active?: boolean) {
 
     }
 }
