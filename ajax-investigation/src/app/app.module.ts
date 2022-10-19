@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserTableComponent } from './user-table/user-table.component';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserTableComponent
+    UserTableComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,

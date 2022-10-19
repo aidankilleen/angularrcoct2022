@@ -15,9 +15,21 @@ import { UserService } from './user.service';
     >
     </user-table>
 
+    <user-dialog
+      [show]="editing"
+      [user]="editingUser"
+      (save)="onSaveFromDialog($event)"
+    >
+    </user-dialog>
+
+
+
+
+
+
     <hr>
     <div *ngIf="editing">
-      <h2>User Dialog</h2>
+      <h2> Old User Dialog</h2>
 
       Name:<input [(ngModel)]="editingUser.name"><br>
       Email:<input [(ngModel)]="editingUser.email"><br>
@@ -118,6 +130,37 @@ export class AppComponent implements OnInit {
                                 this.selectedUser?.active);
     this.editing = true;
   }
+
+
+  onSaveFromDialog(userToSave: User) {
+
+    if (userToSave.id == undefined) {
+      // new user (no id)
+      this.userHttpService.addUser(userToSave)
+      .subscribe((data)=> {
+        let addedUser = data as User;
+        this.users.push(addedUser);
+        this.editing = false;
+      })
+
+    } else {
+      // update 
+      this.userHttpService.updateUser(userToSave)
+      .subscribe(() => {
+
+        let index = this.users.findIndex(user => user.id == userToSave.id);
+
+        // replace the user at this index with the updated user
+        this.users.splice(index, 1, userToSave);
+
+        this.editing = false;
+
+      });
+    }
+  }
+
+
+
 
   onSaveUser() {
     //let newUser = new User(undefined,"New User From UI", "nu@gmail.com", false);
