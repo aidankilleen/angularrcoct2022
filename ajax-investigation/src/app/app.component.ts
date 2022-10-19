@@ -29,6 +29,8 @@ import { UserService } from './user.service';
       </tbody>
     </table>
 
+    <button (click)="onDelete()">Delete</button>
+
     <button (click)="onTestAjax()">
       Test Ajax
     </button>
@@ -40,6 +42,22 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
 
+  onDelete() {
+    if (confirm("Are you sure?")) {
+      this.userHttpService.deleteUser(this.selectedId)
+      .subscribe(()=>{
+        let index = this.users.findIndex(user => user.id == this.selectedId);
+
+        this.users.splice(index, 1);
+
+        this.selectedId = 0;
+        this.selectedUser = new User(0, "", "", false);
+      });
+
+    }
+  }
+
+
   title = 'ajax-investigation';
 
   selectedId:number = 0;
@@ -47,8 +65,7 @@ export class AppComponent {
 
   users:User[] = [];
 
-  constructor(public userService: UserService, 
-    public userHttpService: UserHttpService) {
+  constructor(public userService: UserService, public userHttpService: UserHttpService) {
   }
 
   onGetUsers() {
@@ -57,13 +74,16 @@ export class AppComponent {
       .subscribe((data)=> {
         this.users = data as User[];
       });
-
   }
+  
   onTestAjax() {
     this.userHttpService.testAjaxCall();
   }
   onChange() {
-    this.selectedUser = this.userService.getUser(this.selectedId);
+    this.userHttpService.getUser(this.selectedId)
+      .subscribe((data)=>{
+        this.selectedUser = data as User;
+      });
   }
 
  

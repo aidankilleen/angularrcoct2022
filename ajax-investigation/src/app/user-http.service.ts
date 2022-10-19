@@ -7,24 +7,26 @@ import User from './user.model';
 })
 export class UserHttpService {
 
+  baseUrl = "http://localhost:3000/users";
+
   constructor(public httpClient: HttpClient) { }
 
   testAjaxCall() {
-    this.httpClient.get("http://localhost:3000/users/")
+    this.httpClient.get(this.baseUrl)
       .subscribe((data)=>{
         console.log(data);
       });
   }
   
   getUsers() {
-    return this.httpClient.get("http://localhost:3000/users/");
+    return this.httpClient.get(this.baseUrl);
   }
-
-
-
-  /*
-  getUser(id:number): User {
-
+  
+  getUser(id:number) {
+    return this.httpClient.get(`${this.baseUrl}/${id}`);
   }
-  */
+  
+  deleteUser(id:number) {
+    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+  }
 }
