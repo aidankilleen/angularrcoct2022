@@ -15,15 +15,13 @@ export class UserHttpService {
         console.log(data);
       });
   }
-
   
   getUsers() {
-
     return this.httpClient.get("http://localhost:3000/users/");
   }
 
 
-  
+
   /*
   getUser(id:number): User {
 
