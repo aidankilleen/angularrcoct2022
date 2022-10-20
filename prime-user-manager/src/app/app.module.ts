@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -25,7 +29,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule, 
     AppRoutingModule, 
     HttpClientModule,
-    MenubarModule
+    FormsModule, 
+    MenubarModule, 
+    TableModule, 
+    ButtonModule, 
+    ConfirmDialogModule, 
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
